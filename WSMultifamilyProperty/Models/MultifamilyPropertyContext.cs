@@ -582,6 +582,9 @@ namespace WSMultifamilyProperty.Models
                 entity.HasIndex(e => e.IdDwelling)
                     .HasName("fkuser_dwelling");
 
+                entity.HasIndex(e => e.IdOptionalRole)
+                    .HasName("fkuser_optionalRole");
+
                 entity.HasIndex(e => e.IdResidentialComplex)
                     .HasName("fkuser_residentialComplex");
 
@@ -623,6 +626,10 @@ namespace WSMultifamilyProperty.Models
                 entity.Property(e => e.IdDwelling)
                     .HasColumnName("id_dwelling")
                     .HasColumnType("bigint(20) unsigned");
+
+                entity.Property(e => e.IdOptionalRole)
+                    .HasColumnName("id_optionalRole")
+                    .HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.IdResidentialComplex)
                     .HasColumnName("id_residentialComplex")
@@ -674,6 +681,11 @@ namespace WSMultifamilyProperty.Models
                     .HasForeignKey(d => d.IdDwelling)
                     .HasConstraintName("fkuser_dwelling");
 
+                entity.HasOne(d => d.IdOptionalRoleNavigation)
+                    .WithMany(p => p.UserIdOptionalRoleNavigation)
+                    .HasForeignKey(d => d.IdOptionalRole)
+                    .HasConstraintName("fkuser_optionalRole");
+
                 entity.HasOne(d => d.IdResidentialComplexNavigation)
                     .WithMany(p => p.User)
                     .HasForeignKey(d => d.IdResidentialComplex)
@@ -681,7 +693,7 @@ namespace WSMultifamilyProperty.Models
                     .HasConstraintName("fkuser_residentialComplex");
 
                 entity.HasOne(d => d.IdRoleNavigation)
-                    .WithMany(p => p.User)
+                    .WithMany(p => p.UserIdRoleNavigation)
                     .HasForeignKey(d => d.IdRole)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fkuser_role");

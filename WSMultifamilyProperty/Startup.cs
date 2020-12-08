@@ -34,7 +34,9 @@ namespace WSMultifamilyProperty
 
 
             services.AddScoped<IResidentialComplexService, ResidentialComplexService>();
-
+            services.AddScoped<IBuildingService, BuildingService>();
+            services.AddScoped<IDwellingService, DwellingService>();
+            services.AddScoped<IUserService, UserService>();
 
         }
 

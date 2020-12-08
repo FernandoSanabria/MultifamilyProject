@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WSMultifamilyProperty.Interfaces;
-using WSMultifamilyProperty.Models;
 using WSMultifamilyProperty.Models.Request;
 using WSTest.Models.Response;
 
@@ -13,24 +12,24 @@ namespace WSMultifamilyProperty.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ResidentialComplexController : ControllerBase
+    public class BuildingController : ControllerBase
     {
+        private IBuildingService _buildingService;
 
-        private IResidentialComplexService _residentialComplexService;
-
-        public ResidentialComplexController (IResidentialComplexService residentialComplexService)
+        public BuildingController (IBuildingService buildingService)
         {
-            this._residentialComplexService = residentialComplexService;
+            this._buildingService = buildingService;
         }
 
+
         [HttpPost]
-        public IActionResult Add(ResidentialComplexRequest request)
+        public IActionResult Add(BuildingRequest request)
         {
             Answer answer = new Answer();
 
             try
             {
-                _residentialComplexService.Add(request);
+                _buildingService.Add(request);
                 answer.Successful = true;
             }
             catch (Exception err)
@@ -41,15 +40,32 @@ namespace WSMultifamilyProperty.Controllers
             return Ok(answer);
         }
 
-
         [HttpPut]
-        public IActionResult Update(ResidentialComplexRequest request)
+        public IActionResult Update(BuildingRequest request)
         {
             Answer answer = new Answer();
 
             try
             {
-                _residentialComplexService.Update(request);
+                _buildingService.Update(request);
+                answer.Successful = true;
+            }
+            catch (Exception err)
+            {
+                answer.Message = err.Message;
+            }
+
+            return Ok(answer);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(BuildingRequest request)
+        {
+            Answer answer = new Answer();
+
+            try
+            {
+                _buildingService.Delete(request);
                 answer.Successful = true;
             }
             catch (Exception err)
@@ -67,7 +83,7 @@ namespace WSMultifamilyProperty.Controllers
 
             try
             {
-                answer.Data = _residentialComplexService.Get();
+                answer.Data = _buildingService.Get();
                 answer.Successful = true;
             }
             catch (Exception err)
@@ -77,26 +93,6 @@ namespace WSMultifamilyProperty.Controllers
 
             return Ok(answer);
         }
-
-
-        [HttpDelete]
-        public IActionResult Delete(ResidentialComplexRequest request)
-        {
-            Answer answer = new Answer();
-
-            try
-            {
-                _residentialComplexService.Delete(request);
-                answer.Successful = true;
-            }
-            catch (Exception err)
-            {
-                answer.Message = err.Message;
-            }
-
-            return Ok(answer);
-        }
-
 
     }
 }

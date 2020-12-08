@@ -14,6 +14,7 @@ namespace WSMultifamilyProperty.Models
         public string Email { get; set; }
         public bool? Active { get; set; }
         public uint IdRole { get; set; }
+        public uint? IdOptionalRole { get; set; }
         public string Tenure { get; set; }
         public ulong IdResidentialComplex { get; set; }
         public ulong? IdDwelling { get; set; }
@@ -21,6 +22,7 @@ namespace WSMultifamilyProperty.Models
         public DateTime ModifiedAt { get; set; }
 
         public virtual Dwelling IdDwellingNavigation { get; set; }
+        public virtual Role IdOptionalRoleNavigation { get; set; }
         public virtual ResidentialComplex IdResidentialComplexNavigation { get; set; }
         public virtual Role IdRoleNavigation { get; set; }
     }

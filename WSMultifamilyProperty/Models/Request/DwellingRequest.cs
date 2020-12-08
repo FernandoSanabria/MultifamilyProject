@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WSMultifamilyProperty.Models.Request
 {
-    public class ResidentialComplexRequest
+    public class DwellingRequest
     {
 
         public ulong Id { get; set; }
@@ -15,12 +15,7 @@ namespace WSMultifamilyProperty.Models.Request
         public string Name { get; set; }
 
         [Required]
-        public string Address { get; set; }
-
-        [Required]
-        public ulong Phonenumber { get; set; }
-
-   
+        public ulong IdBuilding { get; set; }
 
     }
 }

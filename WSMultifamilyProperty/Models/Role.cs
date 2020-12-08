@@ -8,7 +8,8 @@ namespace WSMultifamilyProperty.Models
         public Role()
         {
             RolAction = new HashSet<RolAction>();
-            User = new HashSet<User>();
+            UserIdOptionalRoleNavigation = new HashSet<User>();
+            UserIdRoleNavigation = new HashSet<User>();
         }
 
         public uint Id { get; set; }
@@ -17,6 +18,7 @@ namespace WSMultifamilyProperty.Models
         public DateTime ModifiedAt { get; set; }
 
         public virtual ICollection<RolAction> RolAction { get; set; }
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<User> UserIdOptionalRoleNavigation { get; set; }
+        public virtual ICollection<User> UserIdRoleNavigation { get; set; }
     }
 }
